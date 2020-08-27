@@ -4,8 +4,8 @@ from django.core.exceptions import ValidationError
 
 from irekua_database.models.base import IrekuaModelBase
 from irekua_database.models import CollectionType
-from irekua_organisms.models import CollectionTypeOrganismType
-from irekua_organisms.models import CollectionTypeOrganismCaptureType
+from irekua_organisms.models.collection_type_organism_type import CollectionTypeOrganismType
+from irekua_organisms.models.collection_type_organism_capture_type import CollectionTypeOrganismCaptureType
 
 
 class CollectionTypeOrganismConfig(IrekuaModelBase):
@@ -28,7 +28,7 @@ class CollectionTypeOrganismConfig(IrekuaModelBase):
     organism_types = models.ManyToManyField(
         'OrganismType',
         through='CollectionTypeOrganismType',
-        through_fields=('collection_type', 'organism_type'),
+        through_fields=('collection_type_organism_config', 'organism_type'),
         verbose_name=_('organism types'),
         help_text=_(
             'Types of organisms that can be registered into '
@@ -36,6 +36,8 @@ class CollectionTypeOrganismConfig(IrekuaModelBase):
         blank=True)
     organism_capture_types = models.ManyToManyField(
         'OrganismCaptureType',
+        through='CollectionTypeOrganismCaptureType',
+        through_fields=('collection_type_organism_config', 'organism_capture_type'),
         verbose_name=_('organism capture types'),
         help_text=_(
             'Types of organism captures that can be registered into '

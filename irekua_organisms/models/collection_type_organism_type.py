@@ -3,19 +3,18 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from irekua_database.models.base import IrekuaModelBase
-
 from irekua_database.utils import validate_JSON_schema
 from irekua_database.utils import validate_JSON_instance
 from irekua_database.utils import simple_JSON_schema
 
 
 class CollectionTypeOrganismType(IrekuaModelBase):
-    collection_type = models.ForeignKey(
+    collection_type_organism_config = models.ForeignKey(
         'CollectionTypeOrganismConfig',
         on_delete=models.CASCADE,
-        db_column='collection_type_id',
-        verbose_name=_('collection type'),
-        help_text=_('Collection Type'),
+        db_column='collection_type_organism_config_id',
+        verbose_name=_('collection type organism config'),
+        help_text=_('Collection type organism configuration'),
         blank=False,
         null=False)
     organism_type = models.ForeignKey(
@@ -43,7 +42,7 @@ class CollectionTypeOrganismType(IrekuaModelBase):
 
         ordering = ['-created_on']
         unique_together = (
-            ('collection_type', 'organism_type'),
+            ('collection_type_organism_config', 'organism_type'),
         )
 
     def validate_additional_metadata(self, metadata):

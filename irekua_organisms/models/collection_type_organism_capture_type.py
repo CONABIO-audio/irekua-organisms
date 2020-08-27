@@ -43,7 +43,7 @@ class CollectionTypeOrganismCaptureType(IrekuaModelBase):
 
         ordering = ['-created_on']
         unique_together = (
-            ('collection_type', 'organism_capture_type'),
+            ('collection_type_organism_config', 'organism_capture_type'),
         )
 
     def validate_additional_metadata(self, metadata):

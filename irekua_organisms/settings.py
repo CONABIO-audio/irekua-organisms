@@ -1,3 +1,3 @@
-IREKUA_MODELS_APPS = [
+IREKUA_ORGANISMS_APPS = [
     'irekua_organisms',
 ]
